@@ -2,11 +2,11 @@
 
 -   ### tools needed
     
-    1. bs4 and urllib.request pip install would be needed
+    1. bs4 and urllib.request pip install would be needed.
 
-    2. Urlopen install need 
+    2. Urlopen install need.
 
-    3. pyhton latest update
+    3. pyhton latest update.
 
     -   #### User guide
 
