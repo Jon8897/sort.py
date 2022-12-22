@@ -34,6 +34,7 @@ sg.theme("SystemDefaultForReal")
 layout = [
     [sg.T("")],
     [sg.Text("Choose a CSV file:"), sg.Input(), sg.FileBrowse(key="-IN-")],
+    [sg.ProgressBar(max_value=100, orientation='h', size=(30,15),key='-PROG-')]
     [sg.Button("Submit")]
 ]
 window = sg.Window('Sort app', layout, size=(600, 300))
