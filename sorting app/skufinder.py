@@ -1,22 +1,18 @@
-# imports libaries that will be needed to run the program
+# Imports libaries that will be needed to run the program
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 import csv
 
-#function and reading through the csv
-#open html links and finds SKU number
+# Function and reading through the csv
+# Open html links and finds SKU number
 def run_scrapper(filename):
-    input_file = open(filename, 'r', encoding='utf-8')
-    reader = csv.reader(input_file, delimiter=',', quotechar='"',
-                        quoting=csv.QUOTE_MINIMAL)
-    output_file = open('output.csv', 'a', newline='')
-    writer = csv.writer(output_file, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+    with open(filename, 'r', encoding='utf-8') as input_file, open('output.csv', 'a', newline='', encoding='utf-8') as output_file:
+        reader = csv.reader(input_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        writer = csv.writer(output_file, delimiter=',', quoting=csv.QUOTE_MINIMAL)
 
     next(reader)
-    line_number = 0
-    for url, description in reader:
-        line_number = line_number + 1
-        print(line_number)
+    for line_number, (url, description) in enumerate(reader, start=1):
+        print(f'line_number {line_number}')
         try:
             page = urlopen(url)
             html_bytes = page.read()
@@ -24,7 +20,14 @@ def run_scrapper(filename):
             soup = BeautifulSoup(html, 'html.parser')
             sku = soup.find('div', class_='value', itemprop="sku").string
 
-            writer.writerow([sku, url, description])
+            if sku:
+                writer.writerow([sku, url, description])
+            else:
+                print(f"No SKU found for URL: {url}")
         except Exception as e:
-            print(f'Error processing {url}: {e}')
-            continue
+                print(f'Error processing {url}: {e}')
+
+# For standalone testing or execution
+if __name__ == "__main__":
+    filename = 'input.csv'  
+    run_scrapper(filename)

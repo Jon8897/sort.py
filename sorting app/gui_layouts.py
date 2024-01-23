@@ -1,4 +1,4 @@
-# imports libaries that will be needed to run the program
+# Imports libaries that will be needed to run the program
 import PySimpleGUI as sg
 
 def create_main_layout():

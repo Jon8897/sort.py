@@ -1,4 +1,4 @@
-# imports libaries that will be needed to run the program
+# Imports libaries that will be needed to run the program
 import PySimpleGUI as sg
 from gui_layouts import create_main_layout
 from skufinder import find_sku
