@@ -1,28 +1,57 @@
-## User Experience
+# Sorting App
 
--   ### tools needed
-    
-    1. bs4 and urllib.request pip install would be needed.
+*Version 1.0.0.2*
 
-    2. Urlopen install need.
+This project is a Python-based tool designed for efficient web scraping, specifically tailored for finding SKU numbers and extracting SEO-related metadata from specified URLs.
 
-    3. pyhton latest update.
+## Tools Needed
 
--   ### User guide
+Before running the program, ensure you have the following:
 
-    1. Download file as a zip in the code section. then you will need to unzip the file.
-    
-    2. File must be added into the folder of the program so it will be able to read the file. 
-        
-    3. Within using the sort program is making sure line 7 and 8 have the same names as the file you wish to use for example: pyhtontestdata.csv is the current name, you will need to change this to the file name you have such as data.csv so the pyhtontestdate.csv would need to be removed.
+1. **BeautifulSoup (bs4)**: A Python library for pulling data from HTML and XML files.
+    ```
+    pip install beautifulsoup4
+    ```
+2. **Python**: The program requires Python's latest version. Visit [python.org](https://www.python.org/downloads/) to download and install it.
 
-    4. You will need to open the terminal and write the command -(python sort.py). This will then run the program and give you and output csv file depending on how big the file is the time of finish would vary, and in the terminal you can see what number the program is on.
+## User Guide
 
-    4. Once program is done go into folder and get the output.csv file and rename and upload it where you need.
+### Downloading and Setting Up
 
--   ### Future upgrades
+1. **Download**:
+    - Go to the 'Code' section of the GitHub repository.
+    - Click on 'Download ZIP', then extract the ZIP file to your preferred location.
 
-    1. GUI will need to be add for more user friendly usage 
+2. **File Preparation**:
+    - Place your input CSV file in the same directory as the program.
+    - The CSV file should be named according to the reference in the script (default is `pyhtontestdata.csv`). You can change it to match your file's name (e.g., `data.csv`).
 
-    2. Program needs faster running time 
-    
+### Running the Program
+
+1. Open the terminal (Command Prompt, PowerShell, or Terminal).
+2. Navigate to the directory where the program is located.
+3. Execute the program:
+    ```
+    python sort.py
+    ```
+    - The script's execution time will depend on the size of the CSV file.
+    - Monitor the progress directly in the terminal.
+
+### Retrieving Output
+
+- After completion, an `output.csv` file will be generated in the same directory.
+- Rename and utilize this file as needed for your requirements.
+
+## Future Upgrades
+
+1. **GUI Integration**: Future iterations will include a user-friendly graphical interface to simplify interactions and improve accessibility.
+
+2. **Performance Enhancements**: Efforts are underway to optimize the script for faster processing, especially for larger data sets.
+
+## Troubleshooting
+
+If you encounter issues, check the following:
+
+- Ensure Python is correctly installed and added to your system's PATH.
+- Verify that the CSV file is correctly named and placed in the same directory as the program.
+- Check for error messages in the terminal and ensure all required libraries are installed.
