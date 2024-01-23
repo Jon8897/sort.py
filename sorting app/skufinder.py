@@ -2,7 +2,6 @@
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 import csv
-import PySimpleGUI as sg
 
 #function and reading through the csv
 #open html links and finds SKU number
@@ -25,36 +24,7 @@ def run_scrapper(filename):
             soup = BeautifulSoup(html, 'html.parser')
             sku = soup.find('div', class_='value', itemprop="sku").string
 
-            # Extracting SEO metadata
-            title_tag = soup.find("title").string if soup.find("title") else "No Title"
-            meta_desc = soup.find("meta", {"name": "description"})
-            meta_desc_content = meta_desc["content"] if meta_desc else "No Description"
-            meta_keywords = soup.find("meta", {"name": "keywords"})
-            meta_keywords_content = meta_keywords["content"] if meta_keywords else "No Keywords"
-
             writer.writerow([sku, url, description])
         except Exception as e:
             print(f'Error processing {url}: {e}')
             continue
-
-#start of gui 
-sg.theme("SystemDefaultForReal")
-layout = [
-    [sg.T("")],
-    [sg.Text("Choose a CSV file:"), sg.Input(), sg.FileBrowse(key="-IN-")],
-    [sg.ProgressBar(max_value=100, orientation='h', size=(30,15),key='-PROG-')]
-    [sg.Button("Submit")]
-]
-window = sg.Window('Sort app', layout, size=(600, 300))
-
-while True:
-    event, values = window.read()
-    if event == sg.WIN_CLOSED or event == "Exit":
-        break
-    elif event == "Submit":
-        filename = values["-IN-"]
-
-        # check if file is csv, error checking needs adding 
-
-        # runs the program
-        run_scrapper(filename)
