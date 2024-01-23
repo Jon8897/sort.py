@@ -24,9 +24,17 @@ def run_scrapper(filename):
             html = html_bytes.decode('utf-8')
             soup = BeautifulSoup(html, 'html.parser')
             sku = soup.find('div', class_='value', itemprop="sku").string
+
+            # Extracting SEO metadata
+            title_tag = soup.find("title").string if soup.find("title") else "No Title"
+            meta_desc = soup.find("meta", {"name": "description"})
+            meta_desc_content = meta_desc["content"] if meta_desc else "No Description"
+            meta_keywords = soup.find("meta", {"name": "keywords"})
+            meta_keywords_content = meta_keywords["content"] if meta_keywords else "No Keywords"
+
             writer.writerow([sku, url, description])
-        except:
-            print('sku not found')
+        except Exception as e:
+            print(f'Error processing {url}: {e}')
             continue
 
 #start of gui 
