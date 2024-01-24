@@ -7,7 +7,7 @@ from seoscraper import run_seo_scraper as scrape_seo
 # The main function where the program starts execution
 def main():
     # Create the main application window with the layout defined in gui_layouts.py
-    window = sg.Window("My Application", create_main_layout(), size=(500,500))
+    window = sg.Window("My Application", create_main_layout(), size=(500,150))
 
     # Event loop to process "events" and get the "values" of the inputs
     while True:
