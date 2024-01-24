@@ -4,7 +4,7 @@ from urllib.request import urlopen
 import csv
 
 # Define a function to scrape data from a list of URLs specified in a CSV file
-def run_scrapper(filename):
+def find_sku(filename):
     # Open the input CSV file to read from and an output CSV file to write to
     with open(filename, 'r', encoding='utf-8') as input_file, open('output.csv', 'a', newline='', encoding='utf-8') as output_file:
         # Create a CSV reader to iterate over input rows and a CSV writer for output
