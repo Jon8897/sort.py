@@ -19,10 +19,10 @@ def create_main_layout():
     # Group the layouts into tabs
     # Each layout is associated with a tab in the GUI
     tab_group_layout = [
-        [sg.Tab("SKU Finder", layout_sku_finder)],  # Tab for SKU Finder
-        [sg.Tab("SEO Scraper", layout_seo_scraper)]  # Tab for SEO Scraper
+        sg.Tab("SKU Finder", layout_sku_finder),  # Tab for SKU Finder
+        sg.Tab("SEO Scraper", layout_seo_scraper)  # Tab for SEO Scraper
     ]
 
     # Return the layout wrapped in a TabGroup
     # The TabGroup is a container for the tabs that allows switching between them
-    return [[sg.TabGroup([tab_group_layout])]]
+    return [[tab_group_layout]]

@@ -2,7 +2,7 @@
 import PySimpleGUI as sg
 from gui_layouts import create_main_layout
 from skufinder import find_sku
-from seoscraper import scrape_seo
+from seoscraper import run_seo_scraper as scrape_seo
 
 # The main function where the program starts execution
 def main():
