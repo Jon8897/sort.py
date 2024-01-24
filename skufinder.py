@@ -42,4 +42,4 @@ if __name__ == "__main__":
     # Set the name of the input CSV file
     filename = 'input.csv'  
     # Call the scraper function with the input file name
-    run_scrapper(filename)
+    find_sku(filename)
