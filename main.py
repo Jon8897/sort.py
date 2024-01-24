@@ -27,9 +27,11 @@ def main():
         # If the 'Scrape SEO' button is clicked
         if event == "Scrape SEO":
             # Call the scrape_seo function and pass the URL provided by the user
-            result = scrape_seo(values["-SEO-URL-"])
+            url_to_scrape = values["-SEO-URL-"]
+            # Call the function and pass the window and the key of the progress bar
+            result = scrape_seo(url_to_scrape, window, '-PROGRESS BAR-')
             # Update the text element with the key '-SEO-RESULT-' with the result
-            window["-SEO-RESULT-"].update(result)
+            window["-SEO-RESULT-"].update(str(result))
 
     # Close the window when the event loop is exited
     window.close()
