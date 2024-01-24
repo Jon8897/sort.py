@@ -4,7 +4,7 @@ from urllib.request import urlopen
 import csv
 
 # Define a function to scrape data from a list of URLs specified in a CSV file
-def find_sku(filename):
+def find_sku(filename, window=None, progress_key=None):
     # Open the input CSV file to read from and an output CSV file to write to
     with open(filename, 'r', encoding='utf-8') as input_file, open('output.csv', 'a', newline='', encoding='utf-8') as output_file:
         # Create a CSV reader to iterate over input rows and a CSV writer for output
@@ -14,9 +14,9 @@ def find_sku(filename):
         # Skip the header row in the input CSV file
         next(reader)
         # Iterate over each row in the input CSV file, with line numbers starting from 1
-        for line_number, (url, description) in enumerate(reader, start=1):
+        for i, (url, description) in enumerate(reader, start=1):
             # Output the current line number to the console
-            print(f'Processing line {line_number}')
+            print(f'Processing line {i}')
             try:
                 # Open the URL and retrieve its HTML content
                 page = urlopen(url)
@@ -33,6 +33,12 @@ def find_sku(filename):
                 else:
                     # If no SKU is found, print a message indicating this for the current URL
                     print(f"No SKU found for URL: {url}")
+
+                # Update the progress bar if window and progress_key are provided
+                if window and progress_key:
+                    window[progress_key].update(i, max_value)
+                    window.refresh()  # Refresh window to reflect progress bar update
+            
             except Exception as e:
                 # If an error occurs during processing, print an error message with the URL
                 print(f'Error processing {url}: {e}')

@@ -21,7 +21,7 @@ def main():
         # If the 'Find SKU' button is clicked
         if event == "Find SKU":
             # Start the find_sku function in a new thread
-            threading.Thread(target=find_sku, args=(values['-SKU-URL-'], window, 'PROGRESS BAR-'), daemon=True).start()
+            threading.Thread(target=find_sku, args=(values['-SKU-URL-'], window, '-PROGRESS BAR-'), daemon=True).start()
 
         # If the 'Scrape SEO' button is clicked
         if event == "Scrape SEO":
