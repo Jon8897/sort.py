@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from urllib.request import urlopen
 import csv
 
-def run_seo_scraper(url_or_urls):
+def run_seo_scraper(url_or_urls, window, progress_key):
     # Check if the input is a single URL string or a list of URLs
     if isinstance(url_or_urls, str):
         # If it's a string, put it into a list to standardize the processing
@@ -13,9 +13,10 @@ def run_seo_scraper(url_or_urls):
 
     # Initialize a list to hold the SEO data for each URL
     seo_data = []
+    max_value = len(urls)
 
     # Loop through each URL in the list
-    for url in urls:
+    for i, url in enumerate(urls, start=1):
         try:
             # Open the URL and read the HTML content
             page = urlopen(url)
@@ -39,6 +40,7 @@ def run_seo_scraper(url_or_urls):
                 'description': meta_desc_content,
                 'keywords': meta_keywords_content
             })
+
         except Exception as e:
             # If there's an error during processing, print it and append an error record
             print(f'Error processing {url}: {e}')
@@ -49,14 +51,10 @@ def run_seo_scraper(url_or_urls):
                 'keywords': 'Error'
             })
 
+            # Update the progress bar after processing each URL
+            if window and progress_key:
+                window[progress_key].update(i, max_value)
+                window.refresh()
+
     # Return the list of SEO data
     return seo_data
-
-# Example usage for a single URL:
-# result = run_seo_scraper('http://example.com')
-# print(result)
-
-# Example usage for multiple URLs:
-# urls = ['http://example.com', 'http://example.org']
-# results = run_seo_scraper(urls)
-# print(results)
