@@ -16,6 +16,9 @@ def create_main_layout():
         [sg.Button("Scrape SEO"), sg.Text("", key="-SEO-RESULT-")]  # Row for the submit button and SEO result display
     ]
 
+    # Add a progress bar to the layout with a maximum value and an initial value
+    progress_bar = sg.ProgressBar(max_value=100, orientation='h', size=(20, 20), key='-PROGRESS BAR-')
+
     # Group the layouts into tabs
     # Each layout is associated with a tab in the GUI
     tab_group_layout = sg.TabGroup ([
@@ -25,4 +28,7 @@ def create_main_layout():
 
     # Return the layout wrapped in a TabGroup
     # The TabGroup is a container for the tabs that allows switching between them
-    return [[tab_group_layout]]
+    return [
+        [tab_group_layout],
+        [sg.Text('Progress:'), progress_bar]
+    ]
