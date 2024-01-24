@@ -41,6 +41,11 @@ def run_seo_scraper(url_or_urls, window, progress_key):
                 'keywords': meta_keywords_content
             })
 
+            # Update the progress bar after processing each URL
+            if window and progress_key:
+                window[progress_key].update(i, max_value)
+                window.refresh()
+
         except Exception as e:
             # If there's an error during processing, print it and append an error record
             print(f'Error processing {url}: {e}')
@@ -51,10 +56,8 @@ def run_seo_scraper(url_or_urls, window, progress_key):
                 'keywords': 'Error'
             })
 
-            # Update the progress bar after processing each URL
-            if window and progress_key:
-                window[progress_key].update(i, max_value)
-                window.refresh()
+    # After the loop is done, send the results back to the event loop
+    window.write_event_value('-THREAD DONE-', seo_data)
 
     # Return the list of SEO data
     return seo_data

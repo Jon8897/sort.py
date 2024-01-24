@@ -3,6 +3,7 @@ import PySimpleGUI as sg
 from gui_layouts import create_main_layout
 from skufinder import find_sku
 from seoscraper import run_seo_scraper as scrape_seo
+import threading
 
 # The main function where the program starts execution
 def main():
@@ -19,19 +20,19 @@ def main():
 
         # If the 'Find SKU' button is clicked
         if event == "Find SKU":
-            # Call the find_sku function and pass the URL provided by the user
-            result = find_sku(values["-SKU-URL-"])
-            # Update the text element with the key '-SKU-RESULT-' with the result
-            window["-SKU-RESULT-"].update(result)
+            # Start the find_sku function in a new thread
+            threading.Thread(target=find_sku, args=(values['-SKU-URL-'], window, 'PROGRESS BAR-'), daemon=True).start()
 
         # If the 'Scrape SEO' button is clicked
         if event == "Scrape SEO":
-            # Call the scrape_seo function and pass the URL provided by the user
-            url_to_scrape = values["-SEO-URL-"]
-            # Call the function and pass the window and the key of the progress bar
-            result = scrape_seo(url_to_scrape, window, '-PROGRESS BAR-')
-            # Update the text element with the key '-SEO-RESULT-' with the result
-            window["-SEO-RESULT-"].update(str(result))
+            # Start the scrape_seo function in a new thread
+            threading.Thread(target=scrape_seo, args=(values["-SEO-URL-"], window, '-PROGRESS BAR-'), daemon=True).start()
+
+        # Handle the event that is called after the thread finishes execution
+        if event == '-THREAD DONE-':
+            # The result is passed back from the thread using window.write_event_value
+            # Update the SEO result text element with the result from the thread
+            window["-SEO-RESULT-"].update(str(values[event]))
 
     # Close the window when the event loop is exited
     window.close()
